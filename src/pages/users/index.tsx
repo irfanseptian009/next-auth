@@ -18,58 +18,72 @@ const UserList = () => {
     fetchUsers(sortBy, order)
   );
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading users</div>;
+  if (isLoading) return <div className="text-center text-lg">Loading...</div>;
+  if (error)
+    return <div className="text-center text-lg text-red-500">Error loading users</div>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">User List</h1>
-      <div className="mb-4">
-        <label>Sort By:</label>
-        <select onChange={(e) => setSortBy(e.target.value)} className="border ml-2 p-2">
-          <option value="firstName">First Name</option>
-          <option value="lastName">Last Name</option>
-        </select>
-        <label className="ml-4">Order:</label>
-        <select onChange={(e) => setOrder(e.target.value)} className="border ml-2 p-2">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+    <div className=" bg-gray-100 mx-auto px-14 py-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">User List</h1>
+      <div className="mb-6 flex justify-center space-x-4">
+        <div className="flex items-center">
+          <label className="mr-2">Sort By:</label>
+          <select
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border text-black p-2 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="firstName">First Name</option>
+            <option value="lastName">Last Name</option>
+          </select>
+        </div>
+        <div className="flex items-center">
+          <label className="mr-2">Order:</label>
+          <select
+            onChange={(e) => setOrder(e.target.value)}
+            className="border text-black p-2 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
       </div>
-      <table className="table-auto w-full">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(
-            (user: {
-              id: number;
-              firstName: string;
-              lastName: string;
-              email: string;
-            }) => (
-              <tr key={user.id}>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>
-                  <button
-                    className="text-blue-500"
-                    onClick={() => router.push(`/users/${user.id}`)}
-                  >
-                    View
-                  </button>
-                </td>
-              </tr>
-            )
-          )}
-        </tbody>
-      </table>
+
+      <div className="overflow-x-auto rounded-lg shadow-lg">
+        <table className="table-auto w-full bg-white">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="py-2 px-4 text-left">First Name</th>
+              <th className="py-2 px-4 text-left">Last Name</th>
+              <th className="py-2 px-4 text-left">Email</th>
+              <th className="py-2 px-4 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(
+              (user: {
+                id: number;
+                firstName: string;
+                lastName: string;
+                email: string;
+              }) => (
+                <tr key={user.id} className="hover:bg-gray-100">
+                  <td className="py-2 px-4">{user.firstName}</td>
+                  <td className="py-2 px-4">{user.lastName}</td>
+                  <td className="py-2 px-4">{user.email}</td>
+                  <td className="py-2 px-4">
+                    <button
+                      className="text-blue-500 hover:underline"
+                      onClick={() => router.push(`/users/${user.id}`)}
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

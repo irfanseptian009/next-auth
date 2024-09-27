@@ -40,16 +40,16 @@ const LoginPage = () => {
       });
       setAuthToken(response.data.token);
       router.push("/dashboard");
-    } catch (error) {
+    } catch (error: unknown) {
       setErrorMessage("Login failed. Please check your credentials.");
+      console.error("Login error:", error);
     }
   };
-
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-gray-200">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white text-black p-6 rounded shadow-md"
+        className="bg-white text-black p-6 shadow-lg rounded-xl"
       >
         <h2 className="text-2xl mb-4">Login</h2>
         {errorMessage && <div className="text-red-500">{errorMessage}</div>}
@@ -76,7 +76,10 @@ const LoginPage = () => {
             <span className="text-red-500">{errors.password.message}</span>
           )}
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+        <button
+          type="submit"
+          className="bg-gray-700 shadow-lg text-white py-1 px-4 rounded"
+        >
           Login
         </button>
       </form>
