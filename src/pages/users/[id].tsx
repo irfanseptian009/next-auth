@@ -1,5 +1,6 @@
 // pages/users/[id].tsx
 import React from "react";
+import Image from "next/image"; // Importing Image from next/image
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -13,70 +14,26 @@ const UserDetail: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  interface UserData {
-    firstName: string;
-    lastName: string;
-    image: string;
-    role: string;
-    age: number;
-    gender: string;
-    bloodGroup: string;
-    height: number;
-    weight: number;
-    eyeColor: string;
-    hair: {
-      color: string;
-      type: string;
-    };
-    email: string;
-    phone: string;
-    address: {
-      address: string;
-      city: string;
-      state: string;
-      postalCode: string;
-      country: string;
-    };
-    company: {
-      name: string;
-      department: string;
-      title: string;
-      address: {
-        address: string;
-        city: string;
-        state: string;
-        postalCode: string;
-        country: string;
-      };
-    };
-    university: string;
-    ip: string;
-    macAddress: string;
-    ssn: string;
-    crypto: {
-      wallet: string;
-      network: string;
-    };
-  }
-
-  const { data, isLoading, error } = useQuery<UserData, Error>(
+  const { data, isLoading, error } = useQuery(
     ["userDetail", id],
     () => fetchUserDetail(id as string),
     { enabled: !!id }
   );
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching user details: {error.message}</p>;
-  if (!data) return null;
+  if (error) return <p>Error fetching user details: {(error as Error).message}</p>;
+  if (!data) return <p>No user data available</p>;
 
   return (
-    <div className=" bg-gray-200 mx-auto py-10 px-4 sm:px-6 lg:px-32">
+    <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <div className="bg-white shadow-lg rounded-lg p-6">
         <div className="flex items-center mb-6">
-          <img
+          <Image
             src={data.image}
             alt={`${data.firstName} ${data.lastName}`}
-            className="w-32 h-32 rounded-full border border-gray-300 object-cover mr-4"
+            width={128}
+            height={128}
+            className="rounded-full border border-gray-300 object-cover mr-4"
           />
           <div>
             <h2 className="text-2xl font-bold">{`${data.firstName} ${data.lastName}`}</h2>
