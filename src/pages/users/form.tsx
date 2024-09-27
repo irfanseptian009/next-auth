@@ -35,7 +35,7 @@ const UserForm = ({ isEdit = false, user = {} }: UserFormProps) => {
   });
   const router = useRouter();
 
-  const onSubmit = async (data: UserFormData) => {
+  const onSubmit = async (data: any) => {
     try {
       if (isEdit) {
         await axios.put(`https://dummyjson.com/users/${user.id}`, data);
