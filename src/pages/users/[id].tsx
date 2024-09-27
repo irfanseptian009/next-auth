@@ -25,7 +25,7 @@ const UserDetail: React.FC = () => {
   if (!data) return <p>No user data available</p>;
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-200 mx-auto py-10 px-4 sm:px-6 lg:px-36">
       <div className="bg-white shadow-lg rounded-lg p-6">
         <div className="flex items-center mb-6">
           <Image

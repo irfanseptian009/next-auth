@@ -23,7 +23,7 @@ const UserList = () => {
     return <div className="text-center text-lg text-red-500">Error loading users</div>;
 
   return (
-    <div className=" bg-gray-100 mx-auto px-14 py-6">
+    <div className=" bg-gray-100 mx-auto px-36 py-6">
       <h1 className="text-3xl font-bold mb-6 text-center">User List</h1>
       <div className="mb-6 flex justify-center space-x-4">
         <div className="flex items-center">
